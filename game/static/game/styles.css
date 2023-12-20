@@ -1,34 +1,69 @@
+/* Base styles */
 body {
-    background-color: #f4f7f6; /* Светлый фон для всей страницы */
-    color: #333; /* Темно-серый цвет текста */
+    background-color: #f4f7f6;
+    color: #333;
     font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Ensures padding doesn't affect overall width */
 }
 
 #game-board {
-    padding: 10px;
-    background-color: #fff; /* Белый фон для игровой доски */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень для доски */
-    border-radius: 10px; /* Скругленные углы */
-    margin: auto auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    margin: 20px auto;
+    max-width: 600px; /* Limits the size on larger screens */
 }
 
 .game-square {
-    width: 270px; /* Установите желаемый размер */
-    height: 270px; /* Убедитесь, что ширина и высота равны */
-    background-color: #e6e6e6; /* Серый фон для квадратов */
+    width: 100%; /* Responsive width */
+    max-width: 270px; /* Maximum width */
+    height: auto; /* Keeps aspect ratio */
+    background-color: #e6e6e6;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 5px; /* Скругленные углы для квадратов */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Тень для квадратов */
-    color: #083d75; /* Голубой цвет текста */
-    font-size: 40px; /* Размер шрифта номеров */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    color: #083d75;
+    font-size: 3em; /* Larger text */
     font-weight: bold;
+    transition: transform 0.3s ease; /* Smooth transformation on click */
+}
+
+.game-square:hover {
+    transform: scale(1.05); /* Slight increase in size on hover */
 }
 
 .wrong-guess {
-    background-color: #ffcccc; /* Цвет фона при неправильной попытке */
+    background-color: #ffcccc;
 }
 
-/* Дополнительные стили при необходимости */
+/* Responsive design for iPhones */
+@media only screen and (max-width: 768px) {
+    #game-board {
+        margin: 10px;
+        padding: 10px;
+    }
+
+    .game-square {
+        max-width: 100px; /* Smaller size for smaller screens */
+        font-size: 2em; /* Smaller font size */
+    }
+}
+
+/* Responsive design for iPads */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    #game-board {
+        margin: 15px;
+        padding: 15px;
+    }
+
+    .game-square {
+        max-width: 150px; /* Adjusted size for medium screens */
+        font-size: 2.5em; /* Adjusted font size */
+    }
+}
