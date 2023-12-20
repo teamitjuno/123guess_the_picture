@@ -1,0 +1,108 @@
+{% load static %} 
+{% load game_extras %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guess the Picture Game</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'game/styles.css' %}">
+</head>
+<body>
+</head>
+<body>
+    <div class="container py-5">
+        <h1 class="text-center">Guess the Picture Game</h1>
+        <p class="text-center">Attempts Left: <span id="attempts">3</span></p>
+        <div class="text-center mb-4">
+        <button class="btn btn-primary" onclick="restartGame()">Restart Game</button>
+    </div>
+        <div id="game-board" class="row justify-content-center">
+            {% for i in 1|to:9 %}
+                {% if forloop.counter0|divisibleby:3 %}
+                    <div class="w-100"></div> <!-- Добавляем перенос строки каждые три квадрата -->
+                {% endif %}
+                <div class="col-4 p-2">
+                    <div class="game-square d-flex justify-content-center align-items-center" id="square-{{ i }}" onclick="makeGuess({{ i }})" role="button" aria-label="Game Square {{ i }}">
+                        {{ i }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- Feedback Modal -->
+        <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="feedbackModalLabel">Game Feedback</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Feedback message will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
+    <script>
+        let attempts = 3;
+        const hiddenImageNumber = parseInt('{{ hidden_image_number }}', 10);
+        let hiddenImageUrl = '';
+
+        {% if hidden_image %}
+        hiddenImageUrl = '{{ hidden_image.image.url }}';
+        {% endif %}
+
+        function makeGuess(squareNumber) {
+            if (attempts > 0) {
+                if (squareNumber === hiddenImageNumber) {
+                    // User guessed the correct square
+                    revealImage(squareNumber);
+                    
+                    showModal('You guessed correctly!');
+                    attempts = 0; // Stop further guesses after a correct guess
+                } else {
+                    // User guessed the wrong square
+                    document.getElementById('square-' + squareNumber).style.backgroundColor = 'red';
+                    attempts--;
+                    updateAttemptsDisplay();
+                }
+            } else {
+                showModal('No more attempts left!');
+            }
+        }
+
+        function revealImage(squareNumber) {
+            let square = document.getElementById('square-' + squareNumber);
+            square.style.backgroundImage = `url('${hiddenImageUrl}')`;
+            square.style.backgroundSize = 'cover';
+            square.style.cursor = 'pointer';
+            square.onclick = function() {
+                enlargeImage(hiddenImageUrl);
+            };
+        }
+        function showModal(message) {
+            $('#feedbackModal .modal-body').text(message);
+            $('#feedbackModal').modal('show');
+        }
+
+        function enlargeImage(imageUrl) {
+            window.open(imageUrl, '_blank').focus();
+        }
+
+        function updateAttemptsDisplay() {
+            document.getElementById('attempts').textContent = attempts;
+        }
+        function restartGame() {
+        location.reload(); // This will reload the page, restarting the game
+    }
+    </script>
+</body>
+</html>
+
+
+

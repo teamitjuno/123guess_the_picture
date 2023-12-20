@@ -1,0 +1,13 @@
+#game-board {
+    width: fit-content;
+    margin: auto;
+}
+
+.game-square {
+    width: 100px; /* Установите желаемый размер */
+    height: 100px; /* Убедитесь, что ширина и высота равны */
+    margin: 5px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    /* Добавьте больше стилей при необходимости */
+}

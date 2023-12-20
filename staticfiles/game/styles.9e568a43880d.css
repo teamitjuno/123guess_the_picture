@@ -1,0 +1,19 @@
+#game-board {
+    width: fit-content;
+    margin: 0 auto; /* Центрирование контейнера */
+}
+
+.game-square {
+    width: 100px; /* Установите желаемый размер */
+    height: 100px; /* Убедитесь, что ширина и высота равны */
+    margin: 5px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    /* Для центрирования текста внутри квадрата */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Добавьте больше стилей при необходимости */
+}
+
+/* Дополнительные стили для неправильных попыток или других эффектов */

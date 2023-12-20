@@ -1,0 +1,34 @@
+body {
+    background-color: #f4f7f6; /* Светлый фон для всей страницы */
+    color: #333; /* Темно-серый цвет текста */
+    font-family: 'Arial', sans-serif;
+}
+
+#game-board {
+    padding: 15px;
+    background-color: #fff; /* Белый фон для игровой доски */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень для доски */
+    border-radius: 10px; /* Скругленные углы */
+    margin: 20px auto;
+}
+
+.game-square {
+    width: 100px; /* Установите желаемый размер */
+    height: 100px; /* Убедитесь, что ширина и высота равны */
+    background-color: #e6e6e6; /* Серый фон для квадратов */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px; /* Скругленные углы для квадратов */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Тень для квадратов */
+    color: #007bff; /* Голубой цвет текста */
+    font-size: 20px; /* Размер шрифта номеров */
+    font-weight: bold;
+}
+
+.wrong-guess {
+    background-color: #ffcccc; /* Цвет фона при неправильной попытке */
+}
+
+/* Дополнительные стили при необходимости */
